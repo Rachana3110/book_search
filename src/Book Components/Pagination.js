@@ -2,19 +2,15 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  pagination: {
-    paddingLeft: "0rem",
-    textAlign: "center",
-    paddingBottom: "20px",
-  },
   button: {
-    marginLeft: "1px",
-    fontSize: "20px",
+    marginLeft: "5px",
+    fontSize: "15px",
   },
   clickedButton: {
-    fontSize: "25px",
-    color: "white",
-    backgroundColor: "black",
+    fontSize: "20px",
+    marginLeft: "5px",
+    color: "black",
+    backgroundColor: "paleturquoise",
   },
 });
 
@@ -31,23 +27,21 @@ const Pagination = ({ booksPerPage, totalBooks, paginate, currentPage }) => {
   }, [totalBooks]);
 
   return (
-    <nav>
-      <ul className={classes.pagination}>
+    <div className={classes.main}>
         {pageNumbers &&
-          pageNumbers.map((num) => {
+          pageNumbers.map((number) => {
             return (
               <button
                 className={
-                  currentPage !== num ? classes.button : classes.clickedButton
+                  currentPage !== number ? classes.button : classes.clickedButton
                 }
-                onClick={() => paginate(num)}
+                onClick={() => paginate(number)}
               >
-                {num}
+                {number}
               </button>
             );
           })}
-      </ul>
-    </nav>
+    </div>
   );
 };
 

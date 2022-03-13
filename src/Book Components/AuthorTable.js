@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  main: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-  },
+  // main: {
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   flexDirection: "row",
+  // },
   table: {
     border: "1px solid black",
     borderCollapse: "collapse",
@@ -55,7 +55,7 @@ const AuthorTable = (name) => {
   }
 
   return (
-    <div>
+    <>
       {authorData !== "" && (
         <div className={classes.main}>
           <table className={classes.table}>
@@ -78,7 +78,7 @@ const AuthorTable = (name) => {
           </table>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

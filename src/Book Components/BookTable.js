@@ -4,29 +4,19 @@ import AuthorTable from "./AuthorTable";
 import Drawer from "@mui/material/Drawer";
 
 const useStyles = makeStyles({
-  root: {
-    flexDirection: "row",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: "30px",
-    paddingLeft: "30px",
-    paddingRight: "30px",
-  },
   main: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "grey",
   },
   table: {
     border: "1px solid black",
     borderCollapse: "collapse",
-    backgroundColor: "white",
+    backgroundColor: "#FFFFFF",
   },
   column: {
     border: "1px solid white",
-    backgroundColor: "black",
+    backgroundColor: "#2F4F4F",
     color: "white",
     textAlign: "center",
   },
@@ -51,7 +41,7 @@ const BookTable = ({ data }) => {
   const [display, setDisplay] = useState(false);
 
   const [state, setState] = React.useState({
-    right: false,
+    top: false,
   });
 
   const toggleDrawer = (autherName, anchor, open) => (event) => {
@@ -84,7 +74,7 @@ const BookTable = ({ data }) => {
                 <tr key={key}>
                   <td className={classes.row}>{val.title}</td>
                   <td className={classes.row}>
-                    {["right"].map((anchor) => (
+                    {["top"].map((anchor) => (
                       <React.Fragment key={anchor}>
                         <a
                           href="!#"
@@ -95,8 +85,7 @@ const BookTable = ({ data }) => {
                             true
                           )}
                         >
-                          {" "}
-                          {val.author_name[0]}{" "}
+                          {val.author_name[0]}
                         </a>
                         <Drawer
                           anchor={anchor}

@@ -6,6 +6,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     height: "30px",
+    paddingTop: "20px",
   },
   input: {
     padding: "20px",

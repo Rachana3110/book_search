@@ -8,6 +8,8 @@ const useStyles = makeStyles({
     color: "white",
     textAlign: "center",
     fontFamily: "Times New Roman, Times, serif",
+    backgroundColor: "#008080",
+    padding: "10px"
   },
 });
 

@@ -6,23 +6,30 @@ import Pagination from "./Pagination";
 import { Box, CircularProgress } from "@mui/material";
 
 const useStyles = makeStyles({
-  header: {
-    fontSize: "40px",
-    color: "white",
-    textAlign: "center",
-    fontFamily: "Times New Roman, Times, serif",
-  },
   load: {
     display: "flex",
-    justifyContent: "center",
-    paddingTop: "100px"
+    flexDirection: "column",
+    paddingTop: "150px",
+    alignItems:"center"
   },
   noResult: {
     textAlign: "center",
     padding: "50px",
-    color: "white",
+    color: "black",
     fontSize: "20px",
   },
+  maintable: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      padding: "30px"
+  },
+  pagination: {
+    display: "flex",
+    backgroundColor: "#2F4F4F",
+    justifyContent: "center",
+    padding: "10px",
+  }
 });
 
 function BookSearch() {
@@ -30,7 +37,7 @@ function BookSearch() {
   const [data, setData] = useState("");
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage= 10;
+  const [booksPerPage, setBooksPerPage] = useState(10);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -43,13 +50,15 @@ function BookSearch() {
       .then(() => setLoading(false))
       .catch(setError);
   }, []);
-  console.log(data)
+  console.log(data);
 
   if (loading) {
-    return <Box className={classes.load}>
-    <CircularProgress size={"100px"} color="inherit"/>
-    <h4>Loading Page...Please wait!</h4>
-  </Box>;
+    return (
+      <Box className={classes.load}>
+        <CircularProgress size={"100px"} color="inherit" />
+        <h4>Loading...Please wait!</h4>
+      </Box>
+    );
   }
 
   if (error) {
@@ -84,26 +93,34 @@ function BookSearch() {
   const currentBooks = mainData.slice(indexofFirstBook, indexofLastBook);
 
   return (
-    <div>
-      <SearchBar term={search} searchKeyword={searchHandler} />
+    <>
+      <div>
+        <SearchBar term={search} searchKeyword={searchHandler} />
+      </div>
       {search.length < 1 ? (
-        <>
-          <BookTable data={currentBooks} />
-          <Pagination
-            booksPerPage={booksPerPage}
-            totalBooks={mainData.length}
-            paginate={paginate}
-            currentPage={currentPage}
-          />
-        </>
+        <div className={classes.maintable}>
+          <div>
+            <BookTable data={currentBooks} />
+          </div>
+          <div className={classes.pagination}>
+            <Pagination
+              booksPerPage={booksPerPage}
+              totalBooks={mainData.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          </div>
+        </div>
       ) : searchResults.length !== 0 ? (
+        <div className={classes.maintable}>
         <BookTable data={searchResults} />
+        </div>
       ) : (
         <div className={classes.noResult}>
-          No Book Details found for the Search!{" "}
+          No Book Details found for the Search!
         </div>
       )}
-    </div>
+    </>
   );
 }
 
