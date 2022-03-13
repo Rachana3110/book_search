@@ -2,19 +2,17 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  // main: {
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   flexDirection: "row",
-  // },
   table: {
     border: "1px solid black",
     borderCollapse: "collapse",
     height: "130px",
+    width: "100px",
   },
   column: {
     border: "1px solid black",
+    backgroundColor: "#2F4F4F",
+    color: "white",
+    textAlign: "center",
   },
   row: {
     textAlign: "left",
@@ -43,7 +41,7 @@ const AuthorTable = (name) => {
   }, [author]);
 
   if (loading) {
-    return <div>Loading Author Details....Please Wait!</div>;
+    return <></>;
   }
 
   if (error) {

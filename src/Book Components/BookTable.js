@@ -27,11 +27,14 @@ const useStyles = makeStyles({
   SideBar: {
     display: "flex",
   },
-  link: {
+  button: {
+    display: "flex",
     color: "blue",
-  },
-  drawer: {
-    backgroundColor: "grey",
+    padding: "0",
+    border: "none",
+    background: "none",
+    textAlign: "left",
+    fontSize: "15px",
   },
 });
 
@@ -40,8 +43,8 @@ const BookTable = ({ data }) => {
   const [authorDetails, setAuthorDetails] = useState();
   const [display, setDisplay] = useState(false);
 
-  const [state, setState] = React.useState({
-    top: false,
+  const [state, setState] = useState({
+    right: false,
   });
 
   const toggleDrawer = (autherName, anchor, open) => (event) => {
@@ -59,26 +62,25 @@ const BookTable = ({ data }) => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.main}>
-        <table className={classes.table}>
-          <tr>
-            <th className={classes.column}> Book Name</th>
-            <th className={classes.column}> Author Name</th>
-            <th className={classes.column}> Year of Publish</th>
-            <th className={classes.column}> Published Languages</th>
-            <th className={classes.column}> Published Places</th>
-          </tr>
-          {data.map((val, key) => {
-            return (
-              <>
-                <tr key={key}>
-                  <td className={classes.row}>{val.title}</td>
-                  <td className={classes.row}>
-                    {["top"].map((anchor) => (
-                      <React.Fragment key={anchor}>
-                        <a
-                          href="!#"
-                          className={classes.link}
+      {["right"].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <div className={classes.main}>
+            <table className={classes.table}>
+              <tr>
+                <th className={classes.column}> Book Name</th>
+                <th className={classes.column}> Author Name</th>
+                <th className={classes.column}> Year of Publish</th>
+                <th className={classes.column}> Published Languages</th>
+                <th className={classes.column}> Published Places</th>
+              </tr>
+              {data.map((val, key) => {
+                return (
+                  <>
+                    <tr key={key}>
+                      <td className={classes.row}>{val.title}</td>
+                      <td className={classes.row}>
+                        <button
+                          className={classes.button}
                           onClick={toggleDrawer(
                             val.author_name[0],
                             anchor,
@@ -86,41 +88,36 @@ const BookTable = ({ data }) => {
                           )}
                         >
                           {val.author_name[0]}
-                        </a>
-                        <Drawer
-                          anchor={anchor}
-                          open={state[anchor]}
-                          onClose={toggleDrawer(
-                            val.author_name[0],
-                            anchor,
-                            false
-                          )}
-                          className={classes.drawer}
-                        >
-                          <>
-                            {authorDetails && (
-                              <AuthorTable value={authorDetails} />
-                            )}
-                          </>
-                        </Drawer>
-                      </React.Fragment>
-                    ))}
-                  </td>
-                  <td className={classes.row}>{val.first_publish_year}</td>
-                  <td className={classes.row}>
-                    {val.language != null
-                      ? val.language.join(", ")
-                      : val.language}
-                  </td>
-                  <td className={classes.row}>
-                    {val.place != null ? val.place.join(", ") : val.place}
-                  </td>
-                </tr>
-              </>
-            );
-          })}
-        </table>
-      </div>
+                        </button>
+                      </td>
+                      <td className={classes.row}>{val.first_publish_year}</td>
+                      <td className={classes.row}>
+                        {val.language != null
+                          ? val.language.join(", ")
+                          : val.language}
+                      </td>
+                      <td className={classes.row}>
+                        {val.place != null ? val.place.join(", ") : val.place}
+                      </td>
+                    </tr>
+                  </>
+                );
+              })}
+            </table>
+          </div>
+          <Drawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(
+              data.map((book) => book.author_name[0]),
+              anchor,
+              false
+            )}
+          >
+            <>{authorDetails && <AuthorTable value={authorDetails} />}</>
+          </Drawer>
+        </React.Fragment>
+      ))}
     </div>
   );
 };

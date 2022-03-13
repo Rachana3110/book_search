@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     paddingTop: "150px",
-    alignItems:"center"
+    alignItems: "center",
   },
   noResult: {
     textAlign: "center",
@@ -19,17 +19,17 @@ const useStyles = makeStyles({
     fontSize: "20px",
   },
   maintable: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      padding: "30px"
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    padding: "50px",
   },
   pagination: {
     display: "flex",
     backgroundColor: "#2F4F4F",
     justifyContent: "center",
     padding: "10px",
-  }
+  },
 });
 
 function BookSearch() {
@@ -113,7 +113,7 @@ function BookSearch() {
         </div>
       ) : searchResults.length !== 0 ? (
         <div className={classes.maintable}>
-        <BookTable data={searchResults} />
+          <BookTable data={searchResults} />
         </div>
       ) : (
         <div className={classes.noResult}>

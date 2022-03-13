@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     textAlign: "center",
     fontFamily: "Times New Roman, Times, serif",
     backgroundColor: "#008080",
-    padding: "10px"
+    padding: "10px",
   },
 });
 
@@ -17,7 +17,7 @@ function App() {
   const classes = useStyles();
 
   return (
-    <div>   
+    <div>
       <div className={classes.header}>Book Finder</div>
       <BookSearch />
     </div>
